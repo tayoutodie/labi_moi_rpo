@@ -73,7 +73,7 @@ api-ms-win-crt-string-l1-1-0.dll
 | Модуль, обнаруженный после | `winmm.dll` |
 | Полный путь | `C:\\WINDOWS\\SYSTEM32\\winmm.dll` |
 
-Для поиска модуля использована команда `Get-Process -Id 18416 -Module | Where-Object ModuleName -like "winmm.dll" | Select-Object ModuleName,FileName`. Разница 39 − 36 = 3 подтверждена показанными результатами команды в PowerShell; **не утверждаем**, что все три DLL непосредственно загружены одной командой: возможны транзитивные зависимости и другие загрузки. Строка вызова `ctypes.CDLL("winmm.dll")` и результат `timeGetTime()` на этих двух снимках **не видны**, их нужно подтвердить отдельным кадром. Изображения пока находятся в переписке и ещё не добавлены в `screenshots/` GitHub.
+Для поиска модуля использована команда `Get-Process -Id 18416 -Module | Where-Object ModuleName -like "winmm.dll" | Select-Object ModuleName,FileName`. Разница 39 − 36 = 3 подтверждена показанными результатами команды в PowerShell; **не утверждаем**, что все три DLL непосредственно загружены одной командой: возможны транзитивные зависимости и другие загрузки. Строка вызова `ctypes.CDLL("winmm.dll")` и результат `timeGetTime()` подтверждены отдельным последующим снимком, соответствующим `06_library_loaded.png`.
 
 ## Подтверждённый вызов WinMM через ctypes (Windows 11)
 
