@@ -19,6 +19,23 @@
 
 Не получилось: ___
 
+## Наблюдение запуска hostname.exe на Windows 11
+
+Источник: реальный скриншот Microsoft Process Monitor, предоставленный студентом.
+
+| Показатель | Результат |
+|---|---|
+| Родитель | `pwsh.exe`, **PID 20100** |
+| Дочерняя программа | `C:\\Windows\\System32\\hostname.exe` |
+| PID ребёнка | **6712** |
+| Событие создания | `Process Create`, **SUCCESS** |
+| Событие запуска | `Process Start`, **SUCCESS**, `Parent PID: 20100` |
+| Загрузка библиотек | `Load Image` |
+
+В списке событий `hostname.exe` отображены загрузки `ntdll.dll`, `kernel32.dll`, `KernelBase.dll`, `msvcrt.dll`, `ws2_32.dll`, `ucrtbase.dll`, `rpcrt4.dll` и другие. Первой *видимой DLL* в последовательности снимка является `ntdll.dll` (перед ней показан `HOSTNAME.EXE`). Полное число библиотек пока не подсчитано: список на скриншоте обрезан и прокручивается.
+
+Кадр подходит для `01_birth.png` и частично для `02_libraries.png`; исходный PNG пока приложен в переписке, а не к папке `screenshots/` GitHub.
+
 ## Объяснение и инструкция к измерениям (Windows 11)
 
 В Windows создание нового процесса обычно связано с `CreateProcess`, а процесс можно отслеживать через **Process Monitor** по событиям *Process Create* и *Process Exit*. Для DLL используются *Load Image*. В Linux аналогичные действия видны в `strace`, но это другой инструмент и другой механизм.
