@@ -1,0 +1,13 @@
+System: Linux x86_64 container; GCC 14.2.0; Python 3.13.5
+Commands compiled locally using gcc -Wall -Wextra -Werror; Lab 09 fixed with -fsanitize=address,undefined.
+agent v0, pid=550
+agent v0 (python), pid=552
+agent: total=6 area=12
+sqrt(2) = 1.414214
+NULL write prevented
+limit after fix: 100
+name before free: agent
+Memory errors prevented
+
+No sanitizer issues reported for corrected program.
+Note: PIDs are ephemeral IDs in the temporary Linux test container, not on the student's machine.

@@ -1,0 +1,31 @@
+Temporary Linux container, kernel 6.18.57, x86_64, GCC 14.2.0, Python 3.13.5
+PROCESS TREE
+PID=1 PPID=0 supervisord
+shell PID=600 PPID=596
+child sleep PID=609 PPID=608
+
+PROCESS BIRTH
+python parent pid=611; child pid=621 ppid=611
+child-exit-code=7
+missing executable: FileNotFoundError errno=2
+
+CPU BUSY VS IDLE (two 1.2s samples; process_time / monotonic)
+busy CPU=1.199s wall=1.200s per-core load=99.9%
+idle CPU=0.000s wall=1.200s per-core load=0.0%
+
+PYTHON THREADS (Python 3.13.5, conventional GIL; *smaller diagnostic workload* not course benchmark)
+1/2/4 CPU threads: 0.158/0.112/0.105s
+1/4 sleep threads: 0.300/0.301s
+Python 3.14t not installed, hence no no-GIL measurements.
+
+MEMORY MAP (smaller bounded 80 MiB allocation, not course's 300 MiB)
+initial VmSize=416852 kB VmRSS=95404 kB
+reserved VmSize=498772 kB VmRSS=95404 kB
+touched VmSize=498772 kB VmRSS=177324 kB
+released VmSize=416852 kB VmRSS=95404 kB
+
+LIBRARIES (ldd output, transient paths stripped)
+linux-vdso.so.1
+libm.so.6
+libc.so.6
+ld-linux-x86-64.so.2
