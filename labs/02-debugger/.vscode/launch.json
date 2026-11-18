@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Lab 02 GDB",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/labs/02-debugger/debug",
+      "args": [],
+      "cwd": "${workspaceFolder}/labs/02-debugger",
+      "stopAtEntry": false,
+      "MIMode": "gdb",
+      "preLaunchTask": "build debug"
+    }
+  ]
+}

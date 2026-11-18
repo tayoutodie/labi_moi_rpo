@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+*.o
+*.obj
+*.exe
+*.pdb
+*.dSYM/
+build/
+core

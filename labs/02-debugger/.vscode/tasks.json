@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build debug",
+      "type": "shell",
+      "command": "cc",
+      "args": [
+        "-g",
+        "-O0",
+        "debug.c",
+        "-o",
+        "debug"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/labs/02-debugger"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
