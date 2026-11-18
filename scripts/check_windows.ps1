@@ -26,13 +26,16 @@ try {
     if ($compiler -eq "cl") {
       $opts = @("/nologo","/W3","/Od",("/Fe:" + $exe),("/Fo:" + (Join-Path $temp ($name + ".obj"))))
       if ($debug) { $opts += "/Zi" }
-      & cl @opts $src
+      $buildOutput = & cl @opts $src 2>&1
+      $compileExit = $LASTEXITCODE
     } else {
       $opts = @("-Wall","-Wextra","-O0")
       if ($debug) { $opts += "-g" }
-      & $compiler @opts "-o" $exe $src
+      $buildOutput = & $compiler @opts "-o" $exe $src 2>&1
+      $compileExit = $LASTEXITCODE
     }
-    if ($LASTEXITCODE -ne 0 -or -not (Test-Path $exe)) { throw "Compilation failed: $source" }
+    foreach ($line in $buildOutput) { Write-Host $line }
+    if ($compileExit -ne 0 -or -not (Test-Path $exe)) { throw "Compilation failed: $source" }
     return $exe
   }
   function Check([string]$title,[string]$output,[string]$expected) {
