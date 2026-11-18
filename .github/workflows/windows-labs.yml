@@ -1,0 +1,24 @@
+name: Windows lab code checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  smoke-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile and run C and Python
+        shell: pwsh
+        run: ./scripts/check_windows.ps1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: windows-lab-log
+          path: evidence/windows11/local-run.txt
+          if-no-files-found: warn
