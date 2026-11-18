@@ -1,19 +1,23 @@
-# Системное программирование — лабораторные 1–9
+# Системное программирование — лабораторные №1–9
 
-Структура и исходники по [шаблону преподавателя](https://github.com/MaximBytecamp/sysprog-start-template), с отдельными папками и бланками отчётов для [всех девяти лабораторных](labs/README.md).
+Репозиторий оформлен по [шаблону преподавателя](https://github.com/MaximBytecamp/sysprog-start-template) с девятью папками в [labs/](labs/README.md), исходниками и отчётами.
 
-## Windows 11
+## Проверено
 
-Запуск автоматических проверок на ПК: откройте Developer PowerShell for Visual Studio и выполните команду:
+[Windows GitHub Actions — успешная сборка и запуск](evidence/windows11/github-actions-44279028814.md): ЛР 1 (C/Python), ЛР 2 и ЛР 3, Microsoft Windows Server 2025, MSVC, Python 3.13.17. [Журнал запуска](https://github.com/tayoutodie/labi_moi_rpo/actions/runs/44279028814).
 
-    powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check_windows.ps1
+[Вспомогательные измерения Linux](evidence/README.md) не являются наблюдениями с ПК студента.
 
-Результаты записываются в evidence/windows11/local-run.txt. Есть также автоматическая проверка через GitHub Actions: Windows lab code checks.
+## Как завершить лабораторные на Windows 11
 
-[Инструкция для Windows](evidence/windows11/README.md) · [Результаты вспомогательных Linux-экспериментов](evidence/README.md).
+**[Пошаговая инструкция по всем девяти работам](docs/WINDOWS11-FINISH.md)** — что запустить, что измерить, какие скриншоты сохранить и как заполнить `report.md`.
 
-## Статус
+Локальная автоматическая проверка из Developer PowerShell для Visual Studio:
 
-Исходники и структура подготовлены; реальные отчёты по наблюдениям в Windows, скриншоты и измерения Python 3.14t ещё не получены. Автоматическая сборка не равна полной сдаче девяти лабораторных.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check_windows.ps1
+```
 
-Для Linux: bash scripts/check_linux.sh.
+## Статус сдачи
+
+**Программная часть подготовлена частично, все девять отчётов ещё не полностью заполнены.** Для сдачи требуются настоящие наблюдения, замеры и снимки экрана на Windows 11; успешный CI не заменяет их. В частности, ЛР 7 требует Python 3.14 и 3.14t, а ЛР 9 — отдельной проверки ошибок памяти.
