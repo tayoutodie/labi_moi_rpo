@@ -55,6 +55,21 @@ $LASTEXITCODE
 
 Этот код завершения соответствует Windows NTSTATUS **0xC0000005 / STATUS_ACCESS_VIOLATION** — нарушению доступа к памяти. В данном эксперименте ошибка возникла при попытке записи по нулевому указателю. Строка `not reached` не появилась. В предыдущем запуске `overflow` код завершения был 0, хотя поле `limit` повреждалось. Снимок соответствует `01_crash.png`; PNG пока находится только в чате, не в папке `screenshots/` GitHub.
 
+## Аварийное завершение Python через ctypes (Windows 11)
+
+Источник: скриншот терминала Cursor, предоставленный студентом после запуска `python .\\labs\\09-crash\\ctypes_crash.py` и проверки `$LASTEXITCODE`.
+
+```text
+writing 8 bytes to address 0
+Windows fatal exception: access violation
+File "ctypes_crash.py", line 6 in save
+File "ctypes_crash.py", line 11 in <module>
+$LASTEXITCODE
+1
+```
+
+В трассировке **faulthandler** указан вызов `ctypes.memset(address, 0, 8)` из функции `save()` в строке **6**, вызванной из строки **11**. Реальная ошибка — нарушение доступа (access violation) при записи в нулевой адрес. PowerShell отобразил код завершения **1** для этого запуска; не следует путать его с `0xC0000005` из отдельного эксперимента `crash.exe null`. Этот кадр соответствует `02_python_crash.png`. Изображение пока находится только в переписке, не в папке `screenshots/` GitHub.
+
 ## Анализ причин и исправлений (Windows 11)
 
 Исходный `crash.c` специально содержит четыре режима:
