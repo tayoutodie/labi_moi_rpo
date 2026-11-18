@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "lab02: build with GCC (Windows)",
+      "type": "shell",
+      "command": "gcc",
+      "args": [
+        "-g",
+        "-O0",
+        "-Wall",
+        "-Wextra",
+        "-o",
+        "${workspaceFolder}\\labs\\02-debugger\\debug.exe",
+        "${workspaceFolder}\\labs\\02-debugger\\debug.c"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
