@@ -17,6 +17,32 @@ PID Python: ___
 
 Не получилось: ___
 
+## Реальные измерения на Windows 11 — шаги 1–2
+
+Источник: два скриншота терминала Cursor, предоставленные студентом 18.11.2026.
+
+**Сборка и выполнение:** команда `gcc -O0 .\\labs\\03-libraries\\libs.c -o .\\labs\\03-libraries\\libs.exe -lm` завершилась без видимых ошибок. При запуске `libs.exe` получено:
+
+```text
+sqrt(2) = 1.414214
+```
+
+**Импортируемые DLL:** команда `C:\\msys64\\ucrt64\\bin\\objdump.exe -p .\\labs\\03-libraries\\libs.exe | Select-String "DLL Name"` показала:
+
+```text
+KERNEL32.dll
+api-ms-win-crt-environment-l1-1-0.dll
+api-ms-win-crt-heap-l1-1-0.dll
+api-ms-win-crt-locale-l1-1-0.dll
+api-ms-win-crt-math-l1-1-0.dll
+api-ms-win-crt-private-l1-1-0.dll
+api-ms-win-crt-runtime-l1-1-0.dll
+api-ms-win-crt-stdio-l1-1-0.dll
+api-ms-win-crt-string-l1-1-0.dll
+```
+
+Итого **9 записей импорта DLL**. Это имена импортов PE-файла, а не полный перечень реально загруженных модулей процесса. Запись `api-ms-win-crt-math-l1-1-0.dll` относится к математическому API набора Universal CRT; отдельной `libm.dll` в списке нет. Скриншоты ещё не перенесены в папку `screenshots/` GitHub.
+
 ## Подтверждённые результаты и анализ (Windows CI)
 
 [Автопроверка Windows](https://github.com/tayoutodie/labi_moi_rpo/actions/runs/44279028814): сборка `libs.c` через MSVC и запуск **PASS**, вывод: `sqrt(2) = 1.414214`.
