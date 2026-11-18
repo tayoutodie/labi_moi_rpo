@@ -48,6 +48,28 @@ explorer.exe   PID=10884  PPID=10772
 
 Оба снимка подтверждают указанные результаты; сами PNG ещё находятся в переписке и пока не помещены в `screenshots/` GitHub.
 
+## Реальное создание дочернего процесса (Windows 11)
+
+Источник: скриншот терминала PowerShell в Cursor, предоставленный студентом.
+
+Команды:
+
+```powershell
+$child = Start-Process cmd.exe -ArgumentList "/k" -PassThru
+$child.Id
+Get-CimInstance Win32_Process -Filter "ProcessId = $($child.Id)" |
+    Select-Object Name,ProcessId,ParentProcessId
+```
+
+| Поле | Результат |
+|---|---|
+| Дочерний процесс | `cmd.exe` |
+| ProcessId | **20788** |
+| ParentProcessId | **20100** |
+| Родитель | `pwsh.exe` (ранее установленный PID **20100**) |
+
+Наблюдение подтверждает создание дочернего процесса `cmd.exe` из PowerShell. Первоначальная попытка запуска `notepad.exe` вернула PID **4792**, но последующий запрос `Get-CimInstance` не обнаружил процесс по этому PID; причины завершения данного экземпляра по скриншоту установить нельзя. Кадр подходит для `03_child.png` и `04_ppid_command.png`. Изображение пока находится в чате и не перенесено в `screenshots/` GitHub.
+
 ## Объяснение и инструкция к измерениям (Windows 11)
 
 Для задания необходимо увидеть **дерево реальных процессов** и смену родителя у процесса-сироты. На Windows основными инструментами являются Process Explorer, Диспетчер задач и PowerShell.
