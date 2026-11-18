@@ -70,6 +70,16 @@ $LASTEXITCODE
 
 В трассировке **faulthandler** указан вызов `ctypes.memset(address, 0, 8)` из функции `save()` в строке **6**, вызванной из строки **11**. Реальная ошибка — нарушение доступа (access violation) при записи в нулевой адрес. PowerShell отобразил код завершения **1** для этого запуска; не следует путать его с `0xC0000005` из отдельного эксперимента `crash.exe null`. Этот кадр соответствует `02_python_crash.png`. Изображение пока находится только в переписке, не в папке `screenshots/` GitHub.
 
+## Попытка AddressSanitizer с GCC MSYS2 UCRT64 (Windows 11)
+
+На скриншоте терминала Cursor студент запустил:
+
+```powershell
+gcc -g -O0 -fsanitize=address .\\labs\\09-crash\\crash.c -o .\\labs\\09-crash\\crash_asan.exe
+```
+
+Сборка завершилась ошибкой компоновщика **`cannot find -lasan: No such file or directory`** и `collect2.exe: error: ld returned 1 exit status`. Таким образом, AddressSanitizer **не был запущен**, а диагностики `heap-buffer-overflow` и `heap-use-after-free` на этой конфигурации Windows 11 пока нет. Это ограничение используемого GCC/MSYS2 UCRT64, не доказательство исправности или неисправности конкретного кода. Подтверждённые ранее компиляция без ASan, `overflow`, `null`, Python `ctypes` и исправленный вариант остаются отдельными экспериментами. Снимок пока находится в переписке, не в `screenshots/`.
+
 ## Анализ причин и исправлений (Windows 11)
 
 Исходный `crash.c` специально содержит четыре режима:
