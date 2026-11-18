@@ -90,6 +90,20 @@
 
 Это подтверждает, что PowerShell получил ненулевой код завершения `1` для данного принудительно остановленного запуска. Для сравнения, нормальное завершение `hello.py` нажатием Enter дало `0`. Значения принадлежат разным программам/запускам; их нельзя обобщать как обязательные коды для всех способов завершения в Windows.
 
+## Дескрипторы в Process Explorer (Windows 11)
+
+По скриншоту нижней панели **Handles** Process Explorer, предоставленному студентом, в отображаемой части списка видно **13 строк** дескрипторов. Это число строк на кадре, **не** полное количество дескрипторов процесса.
+
+| Тип | Фактически видимые объекты |
+|---|---|
+| Directory | `\\KnownDlls`, `\\Sessions\\1\\BaseNamedObjects` |
+| File | `\\Device\\ConDrv` (несколько строк), каталог проекта |
+| Key | разделы реестра `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options` и `HKLM\\SYSTEM\\ControlSet001\\Control\\Nls\\Sorting\\Versions` |
+| Mutant | объект синхронизации `\\Sessions\\1\\BaseNamedObjects\\SM0:21580:304:WiStaging_02` |
+| Semaphore | два объекта `WiStaging_02_p0`, `WiStaging_02_p0h` |
+
+При первом наблюдении `hello.exe` в Диспетчере задач был отдельный счётчик **46 дескрипторов** (PID 18372), который нельзя заменять количеством видимых строк текущего снимка. На снимке Handles заголовок процесса/PID не виден; студент прислал кадр в ходе исследования нового запуска `hello.exe`. Скриншот пока не добавлен в `screenshots/` репозитория.
+
 ## Подтверждённые результаты и анализ (Windows CI)
 
 Проверка [Windows lab code checks](https://github.com/tayoutodie/labi_moi_rpo/actions/runs/44279028814) на **Windows Server 2025** (не на домашней Windows 11) выполнена успешно: MSVC (`cl`) собрал `hello.c`, а Python 3.13.17 запустил `hello.py`.
